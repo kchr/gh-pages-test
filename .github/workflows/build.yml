@@ -5,6 +5,10 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
   workflow_call:
+    inputs:
+      python-version:
+        required: false
+        default: '3.12'
 
 jobs:
   docs:
@@ -12,10 +16,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Install Python
+      - name: 'Install Python ${{ inputs.python-version }}'
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: '${{ inputs.python-version }}'
       - name: Install dependencies
         shell: sh
         run: |
