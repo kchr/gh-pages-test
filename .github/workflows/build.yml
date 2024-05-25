@@ -9,6 +9,7 @@ on:
       python-version:
         required: false
         default: '3.12'
+        type: string
 
 jobs:
   docs:
