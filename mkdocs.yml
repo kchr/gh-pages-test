@@ -1,0 +1,8 @@
+# mkdocs.yml
+site_name: gh-pages-test
+
+theme:
+  name: "material"
+
+nav:
+  - Home: index.md

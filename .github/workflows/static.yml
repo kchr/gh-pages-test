@@ -31,11 +31,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Install Python and dependencies
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+        run: |
+          echo ::group::Install Python requirements
+          pip install -r requirements.txt
+          echo ::endgroup::
       - name: Build static content
         shell: sh
         run: |
-          echo ::group::Write new content to site/index.html
-          echo "New content was built" > site/index.html
+          echo ::group::Generate docs website
+          mkdocs build -d site/
           echo ::endgroup::
       - name: Setup Pages
         uses: actions/configure-pages@v5
