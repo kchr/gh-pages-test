@@ -6,10 +6,6 @@ on:
   workflow_dispatch:
   workflow_call:
 
-# Sets permissions of the GITHUB_TOKEN to allow checkout of repo
-permissions:
-  contents: read
-
 jobs:
   build:
     runs-on: ubuntu-latest
