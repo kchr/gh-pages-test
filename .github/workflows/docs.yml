@@ -1,5 +1,5 @@
 # Simple workflow for building static content from source
-name: Build static content from source
+name: Build and deploy documentation on Pages
 
 on:
   # Allows you to run this workflow manually from the Actions tab
