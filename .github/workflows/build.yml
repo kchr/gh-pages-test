@@ -1,0 +1,38 @@
+# Simple workflow for building static content from source
+name: Build static content from source
+
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow checkout of repo
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        shell: sh
+        run: |
+          echo ::group::Install Python requirements
+          pip install -r requirements.txt
+          echo ::endgroup::
+      - name: Build static content from source
+        shell: sh
+        run: |
+          echo ::group::Generate docs website
+          mkdocs build -d site/
+          echo ::endgroup::
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload entire repository
+          path: 'site/'
