@@ -31,10 +31,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Install Python and dependencies
+      - name: Install Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Install dependencies
+        shell: sh
         run: |
           echo ::group::Install Python requirements
           pip install -r requirements.txt
