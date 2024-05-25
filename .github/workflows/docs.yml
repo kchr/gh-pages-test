@@ -4,23 +4,29 @@ name: Build and deploy documentation on Pages
 on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+
+  # Allows workflow to be called from another workflow
   workflow_call:
-    inputs:
-      python-version:
-        required: false
-        default: '3.12'
-        type: string
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: '3.12'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: 'Install Python ${{ inputs.python-version }}'
+      - name: 'Install Python ${{ matrix.python-version }}'
         uses: actions/setup-python@v5
         with:
-          python-version: '${{ inputs.python-version }}'
+          python-version: '${{ matrix.python-version }}'
       - name: Install dependencies
         shell: sh
         run: |
